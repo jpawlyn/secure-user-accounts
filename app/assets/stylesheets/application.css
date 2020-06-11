@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  margin: 15px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 300px;
+}
+
+#error_explanation h2 {
+  font-size: 1.3rem;
+}
+
+.actions {
+  margin-top: 15px;
+}

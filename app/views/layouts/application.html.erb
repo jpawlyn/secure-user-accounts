@@ -5,11 +5,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
+    <p class="text-success"><%= notice %></p>
+    <p class="text-danger"><%= alert %></p>
+    <p class="text-right">
+      <% if user_signed_in? %>
+        <%= current_user.email %> <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
+      <% else %>
+        <%= link_to 'Log in', new_user_session_path %>
+      <% end %>
+    <p>
     <%= yield %>
   </body>
 </html>
