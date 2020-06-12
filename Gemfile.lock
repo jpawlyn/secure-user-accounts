@@ -70,6 +70,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-pwned_password (0.1.8)
+      devise (~> 4)
+      pwned (~> 2.0.0)
     erubi (1.9.0)
     ffi (1.13.1)
     globalid (0.4.2)
@@ -101,6 +104,7 @@ GEM
     pg (1.2.3)
     puma (4.3.5)
       nio4r (~> 2.0)
+    pwned (2.0.2)
     rack (2.2.2)
     rack-proxy (0.6.5)
       rack
@@ -188,6 +192,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise
+  devise-pwned_password
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
