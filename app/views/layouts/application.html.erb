@@ -13,13 +13,21 @@
   <body>
     <p class="text-success"><%= notice %></p>
     <p class="text-danger"><%= alert %></p>
-    <p class="text-right">
-      <% if user_signed_in? %>
-        <%= current_user.email %> <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
-      <% else %>
-        <%= link_to 'Log in', new_user_session_path %>
-      <% end %>
-    <p>
+    <% if user_signed_in? %>
+      <div class="float-right">
+        <p class="header-menu">
+          <%= link_to(current_user.email, edit_user_registration_path) %>
+        </p>
+        <p class="header-menu">
+          <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
+        </p>
+      </div>
+    <% else %>
+      <p class="float-right">
+        <%= link_to('Log in', new_user_session_path) unless on_login_page? %>
+      </p>
+    <% end %>
+    <p><%= link_to '🏠', root_path %></p>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,28 @@
+<% if current_user.otp_to_be_verified? %>
+  <p>
+    <canvas id="canvas"></canvas>
+    <small>OTP secret: <%= current_user.otp_secret %></small>
+  </p>
+  <%= javascript_include_tag 'qrcode/build/qrcode.js' %>
+  <script>
+    QRCode.toCanvas(document.getElementById('canvas'), '<%= current_user.otp_provisioning_uri %>', function (error) {
+      if (error) console.error(error)
+    })
+  </script>
+
+  <%= form_for(:user, url: otp_verify_path, html: { method: :put }) do |f| %>
+    <p class="font-weight-bold">Enter the code from Google Authenticator to enable 2FA</p>
+    <div class="field">
+      <%= f.label :otp, '6 digit code' %>
+      <%= f.text_field :otp, autofocus: true, autocomplete: false, maxlength: 6, size: 6 %>
+    </div>
+
+    <%= f.submit "Verify" %>
+  <% end %>
+<% else %>
+  <% if current_user.otp_enabled? %>
+    <p class="text-danger">2FA setup is already setup</p>
+  <% else %>
+    <p class="text-danger">2FA is not setup</p>
+  <% end %>
+<% end %>

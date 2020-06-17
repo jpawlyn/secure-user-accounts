@@ -18,8 +18,20 @@ body {
   margin: 15px;
 }
 
+h3 {
+  margin-top: 25px;
+}
+
 input[type="text"], input[type="email"], input[type="password"] {
   width: 300px;
+}
+
+canvas {
+  display: block;
+}
+
+.header-menu {
+  margin-bottom: 0;
 }
 
 #error_explanation h2 {
