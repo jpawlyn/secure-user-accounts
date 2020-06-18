@@ -30,6 +30,12 @@ class User < ApplicationRecord
     last_otp_at_ts.present?
   end
 
+  def otp_check?(otp)
+    last_otp_at_ts = otp_verify(otp, last_otp_at_ts: last_otp_at&.to_i)
+    update!(last_otp_at: Time.at(last_otp_at_ts)) if last_otp_at_ts
+    last_otp_at_ts.present?
+  end
+
   def otp_provisioning_uri
     return unless otp_secret.present? && otp_verified_at.blank?
     totp = ROTP::TOTP.new(otp_secret, issuer: 'SecureUserAccounts')
@@ -38,8 +44,9 @@ class User < ApplicationRecord
 
   private
 
-  def otp_verify(otp)
+  # see https://github.com/mdp/rotp#preventing-reuse-of-time-based-otps
+  def otp_verify(otp, last_otp_at_ts: nil)
     totp = ROTP::TOTP.new(otp_secret)
-    totp.verify(otp)
+    totp.verify(otp, after: last_otp_at_ts)
   end
 end

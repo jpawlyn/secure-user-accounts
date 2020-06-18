@@ -1,0 +1,12 @@
+<h2>Log in with 2FA</h2>
+
+<%= form_for(:user, url: users_sign_in_otp_path) do |f| %>
+  <div class="field">
+    <%= f.label :otp, '6 digit code' %>
+    <%= f.text_field :otp, autofocus: true, autocomplete: false, maxlength: 6, size: 6 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
