@@ -4,7 +4,9 @@
 class Users::SessionsController < Devise::SessionsController
   prepend_before_action :require_no_authentication, only: [:new, :create, :new_with_otp, :create_with_otp]
 
-  def new_with_otp; end
+  def new_with_otp
+    redirect_to(new_user_session_path) && return unless session[:otp_signin_user_id]
+  end
 
   def create_with_otp
     self.resource = warden.authenticate!(auth_options_for_otp)
