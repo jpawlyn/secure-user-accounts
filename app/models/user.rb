@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def otp_provisioning_uri
-    return unless otp_secret.present? && otp_verified_at.blank?
+    return unless otp_to_be_verified?
     totp = ROTP::TOTP.new(otp_secret, issuer: 'SecureUserAccounts')
     totp.provisioning_uri(email)
   end
