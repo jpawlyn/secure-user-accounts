@@ -15,6 +15,6 @@ For production, you may want to consider:
 * Preventing the disabling of 2FA until a user has verified their current password
 * Emailing users when 2FA is enabled or disabled on their account
 * Locking out a user when they fail to give a correct one time code after a certain number of attempts
-* Encryping OTP secrets in the database
+* Encrypting OTP secrets in the database
 * Providing recovery codes for users who lose access to their device or alternatively, providing a secure procedure for user accounts to be unlocked by support
 * Add your application to the [Two Factor Auth](https://twofactorauth.org/) website by creating a [PR](github.com/2factorauth/twofactorauth). Once added to this site the password manager 1Password will show your site as supporting 2FA.
